@@ -1,0 +1,76 @@
+# SDNET2018 Concrete Crack Detection Dataset
+# Section 4.1: SDNET2018 (Dorafshan et al., 2018)
+# 56,000+ images across Decks, Pavements, Walls
+# Split: 80% train, 10% val, 10% test per category
+
+dataset:
+  name: "SDNET2018"
+  root_dir: "./data/SDNET2018"
+  image_size: [400, 400]
+  num_classes: 2
+
+categories:
+  - name: "Decks"
+    images: 7000+
+    train_ratio: 0.8
+    val_ratio: 0.1
+    test_ratio: 0.1
+  
+  - name: "Pavements"
+    images: 2600+
+    train_ratio: 0.8
+    val_ratio: 0.1
+    test_ratio: 0.1
+  
+  - name: "Walls"
+    images: 3800+
+    train_ratio: 0.8
+    val_ratio: 0.1
+    test_ratio: 0.1
+
+ils:
+  max_iterations: 50
+  patience: 10
+  fusion_epochs: 5
+  learning_rate: 0.0001
+  weight_decay: 0.0002
+
+detectors:
+  canny:
+    enabled: true
+    thresholds: [[30, 90], [50, 150], [75, 225]]
+    apertures: [3, 5, 7]
+  sobel:
+    enabled: true
+    kernels: [3, 5, 7, 9]
+  laplacian:
+    enabled: true
+    kernels: [3, 5, 7, 9]
+  gabor:
+    enabled: true
+    orientations: [4, 8, 12]
+    wavelengths: [4, 8, 16]
+    bandwidths: [0.5, 1.0, 2.0]
+
+# Expected results (Tables 16, 17)
+expected_results:
+  decks:
+    hed_f1: 0.684
+    hed_iou: 0.519
+    ils_f1: 0.705
+    ils_iou: 0.544
+    gain: "+0.021 F1"
+  
+  pavements:
+    hed_f1: 0.698
+    hed_iou: 0.536
+    ils_f1: 0.716
+    ils_iou: 0.558
+    gain: "+0.018 F1"
+  
+  walls:
+    hed_f1: 0.671
+    hed_iou: 0.505
+    ils_f1: 0.694
+    ils_iou: 0.528
+    gain: "+0.023 F1"

@@ -1,0 +1,30 @@
+ils-hed/
+├── ils_hed/
+│   ├── __init__.py
+│   ├── core/
+│   │   ├── __init__.py
+│   │   ├── detectors.py          # File 1
+│   │   ├── fusion.py             # File 2
+│   │   ├── ils_search.py         # File 3
+│   │   ├── metrics.py            # File 4
+│   │   └── hed_model.py          # File 6
+│   ├── data/
+│   │   ├── __init__.py
+│   │   └── datasets.py           # File 5
+│   └── train.py                  # File 7
+├── configs/
+│   ├── default.yaml              # File 18
+│   ├── bsds500.yaml              # File 10
+│   ├── drive.yaml                # File 11
+│   ├── stare.yaml                # File 12
+│   ├── deepcrack.yaml            # File 13
+│   ├── stone331.yaml             # File 14
+│   ├── sdnet2018.yaml            # File 15
+│   ├── transfer.yaml             # File 16
+│   └── ablation.yaml             # File 17
+├── results/
+├── logs/
+├── checkpoints/
+├── requirements.txt              # File 8
+├── setup.py                      # File 9
+└── README.md

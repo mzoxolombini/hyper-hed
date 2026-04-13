@@ -1,0 +1,126 @@
+# Ablation Study Configuration
+# Table 8: Ablation study on BSDS500 test set
+
+ablation_configs:
+  # (a) HED S1-S5 (Original)
+  - id: "a"
+    name: "HED S1-S5 (Original)"
+    hed_enabled: true
+    classical_enabled: false
+    fusion_type: "none"
+    expected_ods: 0.782
+    expected_ois: 0.804
+    expected_ap: 0.833
+  
+  # (b) HED S1-S5 (Our Evaluation)
+  - id: "b"
+    name: "HED S1-S5 (Our Eval)"
+    hed_enabled: true
+    classical_enabled: false
+    fusion_type: "none"
+    expected_ods: 0.781
+    expected_ois: 0.803
+    expected_ap: 0.832
+  
+  # (c) HED + Best Single (Canny)
+  - id: "c"
+    name: "HED + Best Single (Canny)"
+    hed_enabled: true
+    classical_enabled: true
+    classical_selection: "best_single"
+    selected_detector: "canny"
+    fusion_type: "learnable"
+    expected_ods: 0.785
+    expected_ois: 0.807
+    expected_ap: 0.838
+  
+  # (d) HED + All Traditional (avg)
+  - id: "d"
+    name: "HED + All Traditional (avg)"
+    hed_enabled: true
+    classical_enabled: true
+    classical_selection: "all"
+    fusion_type: "average"
+    expected_ods: 0.782
+    expected_ois: 0.804
+    expected_ap: 0.834
+  
+  # (e) HED + ILS Selection (avg)
+  - id: "e"
+    name: "HED + ILS Selection (avg)"
+    hed_enabled: true
+    classical_enabled: true
+    classical_selection: "ils"
+    fusion_type: "average"
+    expected_ods: 0.788
+    expected_ois: 0.810
+    expected_ap: 0.842
+  
+  # (f) HED + ILS Params Only (learned)
+  - id: "f"
+    name: "HED + ILS Params Only (learned)"
+    hed_enabled: true
+    classical_enabled: true
+    classical_selection: "ils"
+    fusion_type: "learnable"
+    parameter_optimization_only: true
+    expected_ods: 0.789
+    expected_ois: 0.811
+    expected_ap: 0.844
+  
+  # (g) HED + ILS Selection (learned) - OUR METHOD
+  - id: "g"
+    name: "HED + ILS Selection (learned)"
+    hed_enabled: true
+    classical_enabled: true
+    classical_selection: "ils"
+    fusion_type: "learnable"
+    expected_ods: 0.791
+    expected_ois: 0.813
+    expected_ap: 0.847
+  
+  # (h) HED + All Traditional (learned)
+  - id: "h"
+    name: "HED + All Traditional (learned)"
+    hed_enabled: true
+    classical_enabled: true
+    classical_selection: "all"
+    fusion_type: "learnable"
+    expected_ods: 0.784
+    expected_ois: 0.806
+    expected_ap: 0.835
+  
+  # (i) HED + Greedy Forward Selection (learned)
+  - id: "i"
+    name: "HED + Greedy Forward Selection (learned)"
+    hed_enabled: true
+    classical_enabled: true
+    classical_selection: "greedy"
+    fusion_type: "learnable"
+    expected_ods: 0.789
+    expected_ois: 0.811
+    expected_ap: 0.844
+  
+  # (j) HED + ILS (P=5)
+  - id: "j"
+    name: "HED + ILS (P=5)"
+    hed_enabled: true
+    classical_enabled: true
+    classical_selection: "ils"
+    fusion_type: "learnable"
+    patience: 5
+    expected_ods: 0.788
+    expected_ois: 0.810
+    expected_ap: 0.843
+  
+  # (k) HED + ILS (P=20)
+  - id: "k"
+    name: "HED + ILS (P=20)"
+    hed_enabled: true
+    classical_enabled: true
+    classical_selection: "ils"
+    fusion_type: "learnable"
+    patience: 20
+    expected_ods: 0.791
+    expected_ois: 0.813
+    expected_ap: 0.847

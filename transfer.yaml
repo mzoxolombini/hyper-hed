@@ -1,0 +1,34 @@
+# Cross-Domain Transfer Configuration
+# Section 5.9: Cross-Domain Transfer Tests
+# Using BSDS500-selected configuration on NYU Depth and PASCAL Context
+
+transfer:
+  source_dataset: "BSDS500"
+  
+  target_datasets:
+    - name: "NYU_Depth_v2"
+      root_dir: "./data/NYU_Depth_v2"
+      test_images: 654
+      description: "Indoor RGB-D images for depth edge detection"
+      expected_hed_ods: 0.720
+      expected_enhanced_ods: 0.728
+      improvement: "+0.008"
+      p_value: 0.003
+      cohens_d: 0.31
+    
+    - name: "PASCAL_Context"
+      root_dir: "./data/PASCAL_Context"
+      val_images: 1024
+      description: "Semantic segmentation context for edge detection"
+      expected_hed_ods: 0.693
+      expected_enhanced_ods: 0.701
+      improvement: "+0.008"
+      p_value: 0.007
+      cohens_d: 0.28
+
+# Transfer protocol
+protocol:
+  retrain_fusion: false  # Use BSDS500 fusion weights
+  evaluate_only: true
+  batch_size: 1
+  device: "cuda"

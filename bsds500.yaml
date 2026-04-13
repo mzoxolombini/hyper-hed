@@ -1,0 +1,64 @@
+# BSDS500 Dataset Configuration
+# Section 4.1: BSDS500 - 500 natural images with ground truth edge maps
+# Standard split: 200 training, 100 validation, 200 test
+
+dataset:
+  name: "BSDS500"
+  root_dir: "./data/BSDS500"
+  image_size: [400, 400]  # HED expects 400x400 input
+  num_classes: 2  # edge / non-edge
+
+splits:
+  train:
+    images: 200
+    indices: "0-199"
+  val:
+    images: 100
+    indices: "200-299"
+  test:
+    images: 200
+    indices: "300-499"
+
+# ILS Hyper-parameters (Section 4.4)
+ils:
+  max_iterations: 50
+  patience: 10  # P=10 optimal (tested P=5,10,15,20)
+  fusion_epochs: 5  # Train fusion weights per evaluation
+  learning_rate: 0.0001
+  weight_decay: 0.0002
+
+# Detector search space (Section 3.1)
+detectors:
+  canny:
+    enabled: true
+    thresholds: [[30, 90], [50, 150], [75, 225]]
+    apertures: [3, 5, 7]
+    total_configs: 9
+  
+  sobel:
+    enabled: true
+    kernels: [3, 5, 7, 9]
+    total_configs: 4
+  
+  laplacian:
+    enabled: true
+    kernels: [3, 5, 7, 9]
+    total_configs: 4
+  
+  gabor:
+    enabled: true
+    orientations: [4, 8, 12]
+    wavelengths: [4, 8, 16]
+    bandwidths: [0.5, 1.0, 2.0]
+    total_configs: 36
+
+# Expected results (Table 4, 5)
+expected_results:
+  hed_baseline:
+    ods: 0.782
+    ois: 0.804
+    ap: 0.833
+  ils_hed:
+    ods: 0.791
+    ois: 0.813
+    ap: 0.847

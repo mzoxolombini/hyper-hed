@@ -1,0 +1,25 @@
+data/
+├── BSDS500/
+│   ├── images/
+│   │   ├── train/
+│   │   ├── val/
+│   │   └── test/
+│   └── edges/
+│       ├── train/
+│       ├── val/
+│       └── test/
+├── DRIVE/
+│   ├── training/
+│   │   ├── images/
+│   │   └── 1st_manual/
+│   └── test/
+│       ├── images/
+│       └── 1st_manual/
+├── DeepCrack/
+│   ├── train/
+│   │   ├── images/
+│   │   └── masks/
+│   └── test/
+│       ├── images/
+│       └── masks/
+└── ...

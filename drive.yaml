@@ -1,0 +1,55 @@
+# DRIVE Retinal Vessel Segmentation Dataset
+# Section 4.1: DRIVE (Staal et al., 2004)
+# 40 retinal images: 20 train, 20 test
+
+dataset:
+  name: "DRIVE"
+  root_dir: "./data/DRIVE"
+  image_size: [400, 400]  # Resized from original 565×584
+  num_classes: 2
+
+splits:
+  train:
+    images: 16  # 80% of training set for training
+    val: 4       # 20% of training set for validation
+  test:
+    images: 20
+
+ils:
+  max_iterations: 50
+  patience: 10
+  fusion_epochs: 5
+  learning_rate: 0.0001
+  weight_decay: 0.0002
+
+detectors:
+  canny:
+    enabled: true
+    thresholds: [[30, 90], [50, 150], [75, 225]]
+    apertures: [3, 5, 7]
+  sobel:
+    enabled: true
+    kernels: [3, 5, 7, 9]
+  laplacian:
+    enabled: true
+    kernels: [3, 5, 7, 9]
+  gabor:
+    enabled: true
+    orientations: [4, 8, 12]
+    wavelengths: [4, 8, 16]
+    bandwidths: [0.5, 1.0, 2.0]
+
+# Expected results (Table 12)
+expected_results:
+  hed_baseline:
+    f1: 0.7812
+    precision: 0.7823
+    recall: 0.7801
+    specificity: 0.9823
+    auc: 0.9872
+  ils_hed:
+    f1: 0.7912
+    precision: 0.7934
+    recall: 0.7890
+    specificity: 0.9834
+    auc: 0.9891

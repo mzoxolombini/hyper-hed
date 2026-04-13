@@ -1,0 +1,53 @@
+# STARE Retinal Vessel Segmentation Dataset
+# Section 4.1: STARE (Hoover et al., 2000)
+# 20 images: 10 training+validation, 10 test
+
+dataset:
+  name: "STARE"
+  root_dir: "./data/STARE"
+  image_size: [400, 400]
+  num_classes: 2
+
+splits:
+  train:
+    images: 8   # 80% of training set
+    val: 2      # 20% of training set
+  test:
+    images: 10
+
+ils:
+  max_iterations: 50
+  patience: 10
+  fusion_epochs: 5
+  learning_rate: 0.0001
+  weight_decay: 0.0002
+
+detectors:
+  canny:
+    enabled: true
+    thresholds: [[30, 90], [50, 150], [75, 225]]
+    apertures: [3, 5, 7]
+  sobel:
+    enabled: true
+    kernels: [3, 5, 7, 9]
+  laplacian:
+    enabled: true
+    kernels: [3, 5, 7, 9]
+  gabor:
+    enabled: true
+    orientations: [4, 8, 12]
+    wavelengths: [4, 8, 16]
+    bandwidths: [0.5, 1.0, 2.0]
+
+# Expected results (Table 13)
+expected_results:
+  hed_baseline:
+    f1: 0.7620
+    precision: 0.7608
+    recall: 0.7632
+    specificity: 0.9795
+  ils_hed:
+    f1: 0.7715
+    precision: 0.7712
+    recall: 0.7718
+    specificity: 0.9808

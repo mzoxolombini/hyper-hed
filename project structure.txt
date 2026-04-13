@@ -1,0 +1,23 @@
+ils-hed/
+├── ils_hed/                    # Main package
+│   ├── core/                   # Core algorithms
+│   │   ├── detectors.py        # Parameterized classical detectors
+│   │   ├── fusion.py           # Learnable fusion module
+│   │   ├── ils_search.py       # ILS hyper-heuristic
+│   │   ├── metrics.py          # ODS/OIS/AP metrics
+│   │   └── hed_model.py        # HED network with side outputs
+│   ├── data/                   # Dataset loaders
+│   │   └── datasets.py         # BSDS500, DRIVE, DeepCrack, etc.
+│   └── train.py                # Main training script
+├── configs/                    # Configuration files
+├── scripts/                    # Utility scripts
+│   ├── download_datasets.py    # Dataset downloader
+│   ├── visualize_results.py    # Qualitative visualization
+│   ├── plot_pr_curves.py       # Precision-recall curves
+│   └── statistical_tests.py    # Bootstrap significance testing
+├── results/                    # Output directory
+├── logs/                       # Training logs
+├── checkpoints/                # Model checkpoints
+├── requirements.txt
+├── setup.py
+└── README.md
