@@ -15,11 +15,17 @@ from tqdm import tqdm
 import sys
 sys.path.append(str(Path(__file__).parent.parent))
 
-from ils_hed.core.hed_model import HEDNetwork
-from ils_hed.core.ils_search import ILS_HED, ILSConfig
-from ils_hed.core.detectors import DetectorFactory
-from ils_hed.core.fusion import LearnableFusion
-from ils_hed.data.datasets import create_dataloaders
+try:
+    from ils_hed.core.hed_model import HEDNetwork
+    from ils_hed.core.ils_search import ILS_HED, ILSConfig
+    from ils_hed.core.detectors import DetectorFactory
+    from ils_hed.core.fusion import LearnableFusion
+    from ils_hed.data.datasets import create_dataloaders
+except ImportError as _e:
+    raise ImportError(
+        "Could not import from 'ils_hed' package. "
+        "Please install the package first with: pip install -e ."
+    ) from _e
 
 
 def evaluate_predictions(model, fusion, best_config, dataloader, device):

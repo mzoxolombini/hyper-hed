@@ -46,7 +46,7 @@ warnings.filterwarnings('ignore')
 class Config:
     """Configuration for ILS-HED system"""
     # Base directory
-    base_data_dir: str = r"C:\Users\mzoxo\OneDrive\Documents\hyp-data"
+    base_data_dir: str = "./data"
 
     # Dataset paths (will be set in __post_init__)
     bsds500_root: str = None

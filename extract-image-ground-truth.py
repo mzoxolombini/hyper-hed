@@ -4,6 +4,7 @@ Extract 1 sample image and ground truth from each dataset
 Fixed version - uses actual file names from folder structure
 """
 
+import argparse
 import os
 import numpy as np
 import cv2
@@ -12,83 +13,96 @@ from scipy.io import loadmat
 from PIL import Image
 import matplotlib.pyplot as plt
 
-# Configuration
-base_data_dir = r"C:\Users\mzoxo\OneDrive\Documents\hyp-data"
 
-# Define paths using actual file names from folder structure
-datasets = {
-    'BSDS500': {
-        'image': os.path.join(base_data_dir, 'BSDS500', 'images', 'train', '100075.jpg'),
-        'gt': os.path.join(base_data_dir, 'BSDS500', 'ground_truth', 'train', '100075.mat'),
-        'type': 'mat'
-    },
-    'DeepCrack': {
-        'image': os.path.join(base_data_dir, 'DeepCrack', 'image', '6192.jpg'),
-        'gt': os.path.join(base_data_dir, 'DeepCrack', 'ground_truth', '6192.bmp'),
-        'type': 'image'
-    },
-    'Stone331': {
-        'image': os.path.join(base_data_dir, 'Stone331', '738.jpg'),
-        'gt': os.path.join(base_data_dir, 'Stone331_mask', '738.bmp'),
-        'type': 'image'
-    },
-    'CrackLS315': {
-        'image': os.path.join(base_data_dir, 'CrackLS315', '0001-2.jpg'),
-        'gt': None,
-        'type': 'none'
-    },
-    'CRKWH100': {
-        'image': os.path.join(base_data_dir, 'CRKWH100', '1000.png'),
-        'gt': None,
-        'type': 'none'
-    },
-    'SDNET_Decks_Cracked': {
-        'image': os.path.join(base_data_dir, 'SDNET', 'Decks', 'Cracked', '7001-115.jpg'),
-        'gt': None,
-        'type': 'none'
-    },
-    'SDNET_Decks_NonCracked': {
-        'image': os.path.join(base_data_dir, 'SDNET', 'Decks', 'Non-cracked', '7001-1.jpg'),
-        'gt': None,
-        'type': 'none'
-    },
-    'SDNET_Pavements_Cracked': {
-        'image': os.path.join(base_data_dir, 'SDNET', 'Pavements', 'Cracked', '001-100.jpg'),
-        'gt': None,
-        'type': 'none'
-    },
-    'SDNET_Pavements_NonCracked': {
-        'image': os.path.join(base_data_dir, 'SDNET', 'Pavements', 'Non-cracked', '001-1.jpg'),
-        'gt': None,
-        'type': 'none'
-    },
-    'SDNET_Walls_Cracked': {
-        'image': os.path.join(base_data_dir, 'SDNET', 'Walls', 'Cracked', '7069-101.jpg'),
-        'gt': None,
-        'type': 'none'
-    },
-    'SDNET_Walls_NonCracked': {
-        'image': os.path.join(base_data_dir, 'SDNET', 'Walls', 'Non-cracked', '7069-1.jpg'),
-        'gt': None,
-        'type': 'none'
-    },
-    'DRIVE_Training': {
-        'image': os.path.join(base_data_dir, 'DRIVE', 'training', 'images', '21_training.tif'),
-        'gt': os.path.join(base_data_dir, 'DRIVE', 'training', '1st_manual', '21_manual1.gif'),
-        'mask': os.path.join(base_data_dir, 'DRIVE', 'training', 'mask', '21_training_mask.gif'),
-        'type': 'vessel'
-    },
-    'DRIVE_Test': {
-        'image': os.path.join(base_data_dir, 'DRIVE', 'test', 'images', '01_test.tif'),
-        'gt': None,  # Test set doesn't have public ground truth in this structure
-        'type': 'none'
-    },
-    'STARE': {
-        'image': os.path.join(base_data_dir, 'STARE', 'im0001.ppm'),
-        'gt': None,
-        'type': 'none'
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Extract one sample image and ground truth from each dataset"
+    )
+    parser.add_argument(
+        "--data_dir",
+        type=str,
+        default="./data",
+        help="Root directory containing all datasets (default: ./data)",
+    )
+    return parser.parse_args()
+
+
+
+def build_datasets(base_data_dir):
+    """Build the dataset path dictionary given a root data directory."""
+    return {
+        'BSDS500': {
+            'image': os.path.join(base_data_dir, 'BSDS500', 'images', 'train', '100075.jpg'),
+            'gt': os.path.join(base_data_dir, 'BSDS500', 'ground_truth', 'train', '100075.mat'),
+            'type': 'mat'
+        },
+        'DeepCrack': {
+            'image': os.path.join(base_data_dir, 'DeepCrack', 'image', '6192.jpg'),
+            'gt': os.path.join(base_data_dir, 'DeepCrack', 'ground_truth', '6192.bmp'),
+            'type': 'image'
+        },
+        'Stone331': {
+            'image': os.path.join(base_data_dir, 'Stone331', '738.jpg'),
+            'gt': os.path.join(base_data_dir, 'Stone331_mask', '738.bmp'),
+            'type': 'image'
+        },
+        'CrackLS315': {
+            'image': os.path.join(base_data_dir, 'CrackLS315', '0001-2.jpg'),
+            'gt': None,
+            'type': 'none'
+        },
+        'CRKWH100': {
+            'image': os.path.join(base_data_dir, 'CRKWH100', '1000.png'),
+            'gt': None,
+            'type': 'none'
+        },
+        'SDNET_Decks_Cracked': {
+            'image': os.path.join(base_data_dir, 'SDNET', 'Decks', 'Cracked', '7001-115.jpg'),
+            'gt': None,
+            'type': 'none'
+        },
+        'SDNET_Decks_NonCracked': {
+            'image': os.path.join(base_data_dir, 'SDNET', 'Decks', 'Non-cracked', '7001-1.jpg'),
+            'gt': None,
+            'type': 'none'
+        },
+        'SDNET_Pavements_Cracked': {
+            'image': os.path.join(base_data_dir, 'SDNET', 'Pavements', 'Cracked', '001-100.jpg'),
+            'gt': None,
+            'type': 'none'
+        },
+        'SDNET_Pavements_NonCracked': {
+            'image': os.path.join(base_data_dir, 'SDNET', 'Pavements', 'Non-cracked', '001-1.jpg'),
+            'gt': None,
+            'type': 'none'
+        },
+        'SDNET_Walls_Cracked': {
+            'image': os.path.join(base_data_dir, 'SDNET', 'Walls', 'Cracked', '7069-101.jpg'),
+            'gt': None,
+            'type': 'none'
+        },
+        'SDNET_Walls_NonCracked': {
+            'image': os.path.join(base_data_dir, 'SDNET', 'Walls', 'Non-cracked', '7069-1.jpg'),
+            'gt': None,
+            'type': 'none'
+        },
+        'DRIVE_Training': {
+            'image': os.path.join(base_data_dir, 'DRIVE', 'training', 'images', '21_training.tif'),
+            'gt': os.path.join(base_data_dir, 'DRIVE', 'training', '1st_manual', '21_manual1.gif'),
+            'mask': os.path.join(base_data_dir, 'DRIVE', 'training', 'mask', '21_training_mask.gif'),
+            'type': 'vessel'
+        },
+        'DRIVE_Test': {
+            'image': os.path.join(base_data_dir, 'DRIVE', 'test', 'images', '01_test.tif'),
+            'gt': None,  # Test set doesn't have public ground truth in this structure
+            'type': 'none'
+        },
+        'STARE': {
+            'image': os.path.join(base_data_dir, 'STARE', 'im0001.ppm'),
+            'gt': None,
+            'type': 'none'
+        },
     }
-}
 
 
 def load_bsds500_gt(mat_path):
@@ -286,6 +300,10 @@ def visualize_sample(dataset_name, img, gt, mask=None, save_path=None):
 
 def main():
     """Extract one sample from each dataset"""
+    args = parse_args()
+    base_data_dir = args.data_dir
+    datasets = build_datasets(base_data_dir)
+
     print("=" * 60)
     print("EXTRACTING ONE SAMPLE FROM EACH DATASET")
     print("=" * 60)

@@ -20,10 +20,16 @@ import cv2
 import sys
 sys.path.append(str(Path(__file__).parent.parent))
 
-from ils_hed.core.hed_model import HEDNetwork
-from ils_hed.core.ils_search import ILS_HED, ILSConfig
-from ils_hed.core.detectors import DetectorFactory
-from ils_hed.core.fusion import LearnableFusion
+try:
+    from ils_hed.core.hed_model import HEDNetwork
+    from ils_hed.core.ils_search import ILS_HED, ILSConfig
+    from ils_hed.core.detectors import DetectorFactory
+    from ils_hed.core.fusion import LearnableFusion
+except ImportError as _e:
+    raise ImportError(
+        "Could not import from 'ils_hed' package. "
+        "Please install the package first with: pip install -e ."
+    ) from _e
 
 
 def load_model(checkpoint_path: Path, device: torch.device):
