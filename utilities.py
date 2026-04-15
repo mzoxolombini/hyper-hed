@@ -15,12 +15,12 @@ from scipy.io import loadmat
 
 def load_image(img_path, as_gray=False):
     """
-    Load an image from *img_path* using PIL, with an optional greyscale
+    Load an image from *img_path* using PIL, with an optional grayscale
     conversion.
 
     Args:
         img_path: Path to the image file.
-        as_gray:  If True, return a 2-D greyscale array; otherwise return a
+        as_gray:  If True, return a 2-D grayscale array; otherwise return a
                   3-channel uint8 RGB array (RGBA images are converted to RGB).
 
     Returns:
@@ -135,7 +135,7 @@ def compute_f1(pred, gt, threshold=0.5, epsilon=1e-7):
     Args:
         pred:      Predicted edge probability map (H × W, float).
         gt:        Binary ground-truth map (H × W, float or bool).
-        threshold: Binarisation threshold for *pred*.
+        threshold: Binarization threshold for *pred*.
         epsilon:   Small constant to avoid division by zero.
 
     Returns:
