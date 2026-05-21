@@ -6,8 +6,7 @@
 
 Official implementation of **ILS-HED**, a hyper-heuristic framework that enhances Holistically-Nested Edge Detection (HED) by automatically selecting optimal classical edge detectors (Canny, Sobel, Laplacian, Gabor) and fusing them with HED side outputs via learnable weights — without retraining the HED backbone.
 
-> **Paper:** *Hyper-heuristic Enhancement of HED* — submitted to Expert Systems With Applications (ESWA).  
-> See [`Hyper_heuristic_Enhancement_of_HED___ESWA.pdf`](Hyper_heuristic_Enhancement_of_HED___ESWA.pdf) for the full manuscript.
+> **Paper:** *Hyper-heuristic Enhancement of HED*
 
 ---
 
