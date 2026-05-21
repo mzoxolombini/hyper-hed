@@ -261,21 +261,6 @@ Key ablation results on BSDS500 (Table 8 in paper):
 
 ---
 
-## 📖 Citation
-
-If you use this code in your research, please cite:
-
-```bibtex
-@article{mbini2024ilshed,
-  title     = {Hyper-heuristic Enhancement of Holistically-Nested Edge Detection},
-  author    = {Mbini, Mzoxolo},
-  journal   = {Expert Systems With Applications},
-  year      = {2024}
-}
-```
-
----
-
 ## 📜 License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
