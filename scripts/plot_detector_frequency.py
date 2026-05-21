@@ -123,7 +123,7 @@ def main():
     parser.add_argument('--output_dir', type=str, default='results/figures',
                         help='Output directory for figures')
     
-    args = args = parser.parse_args()
+    args = parser.parse_args()
     
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)

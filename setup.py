@@ -13,7 +13,7 @@ setup(
     description="ILS-HED: Enhancing Holistically-Nested Edge Detection with Iterative Local Search Hyper-heuristics",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/mzoxolombini/ils-hed",
+    url="https://github.com/mzoxolombini/hyper-hed",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
