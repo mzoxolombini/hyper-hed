@@ -73,11 +73,8 @@ def get_detailed_structure(path):
     return structure
 
 
-def analyze_datasets():
+def analyze_datasets(target_dir: str = "./data"):
     """Main function to analyze the datasets folder"""
-
-    # Target directory
-    target_dir = r"C:\Users\mzoxo\OneDrive\Documents\hyp-data"
 
     # Check if directory exists
     if not os.path.exists(target_dir):
@@ -143,4 +140,9 @@ def analyze_datasets():
 
 
 if __name__ == "__main__":
-    analyze_datasets()
+    import argparse
+    parser = argparse.ArgumentParser(description="Analyse datasets folder structure")
+    parser.add_argument("--target_dir", type=str, default="./data",
+                        help="Path to the datasets directory (default: ./data)")
+    args = parser.parse_args()
+    analyze_datasets(args.target_dir)
