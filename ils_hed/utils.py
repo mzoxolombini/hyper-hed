@@ -141,7 +141,7 @@ def analyze_datasets(target_dir: str = "./data"):
 
 if __name__ == "__main__":
     import argparse
-    parser = argparse.ArgumentParser(description="Analyse datasets folder structure")
+    parser = argparse.ArgumentParser(description="Analyze datasets folder structure")
     parser.add_argument("--target_dir", type=str, default="./data",
                         help="Path to the datasets directory (default: ./data)")
     args = parser.parse_args()
